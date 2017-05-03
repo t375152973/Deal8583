@@ -127,6 +127,9 @@ public class Parse8583 {
 			// 如果不存在，跳过
 			if (fieldProperties == null)
 				continue;
+			if(field==62){
+				System.out.println("62域");
+			}
 			String field_variable_flag = fieldProperties.getProperty("variable_flag");
 			String zipType = fieldProperties.getProperty("zipType");
 			if (field_variable_flag == null || "".equals(field_variable_flag)) {
@@ -145,6 +148,7 @@ public class Parse8583 {
 					String field_value = SimpleUtils.bytes2hex(field_value_byte);
 					field_value = field_value.substring(0, field_length);
 					fieldMap.put(fieldProperties.getProperty("name"), field_value);
+					System.out.println("["+fieldProperties.getProperty("name")+"]:"+field_value);
 				}else
 				if(zipType!=null&&"ASCII".equals(zipType)){
 					int field_length = Integer.parseInt(fieldProperties.getProperty("length"));
@@ -154,6 +158,7 @@ public class Parse8583 {
 					String field_value = SimpleUtils.bytes2hex(field_value_byte);
 					field_value = SimpleUtils.hexStr2Str(field_value, fieldProperties.getProperty("encoding"));
 					fieldMap.put(fieldProperties.getProperty("name"), field_value);
+					System.out.println("["+fieldProperties.getProperty("name")+"]:"+field_value);
 				}else{
 					int field_length = Integer.parseInt(fieldProperties.getProperty("length"));
 					byte[] field_value_byte = new byte[field_length];
@@ -161,6 +166,7 @@ public class Parse8583 {
 					currentIndex += field_length;
 					String field_value = SimpleUtils.bytes2hex(field_value_byte);
 					fieldMap.put(fieldProperties.getProperty("name"), field_value);
+					System.out.println("["+fieldProperties.getProperty("name")+"]:"+field_value);
 				}
 				
 			} else {
@@ -189,6 +195,7 @@ public class Parse8583 {
 					String field_value = SimpleUtils.bytes2hex(field_value_byte);
 					field_value = field_value.substring(0, field_length);
 					fieldMap.put(fieldProperties.getProperty("name"), field_value);
+					System.out.println("["+fieldProperties.getProperty("name")+"]:"+field_value);
 				}else
 				if(zipType!=null&&"ASCII".equals(zipType)){
 					// 先获取变长域的长度值
@@ -202,13 +209,16 @@ public class Parse8583 {
 					System.arraycopy(byteArr, currentIndex, variable_flag_byte, 0, variable_flag_length);
 					currentIndex += variable_flag_length;
 					// 再获取变长域的真实长度值
-					int field_length = SimpleUtils.bytes2short(variable_flag_byte, 0);
+					int field_length = Integer.valueOf(SimpleUtils.bytes2hex(variable_flag_byte));
 					byte[] field_value_byte = new byte[field_length];
 					System.arraycopy(byteArr, currentIndex, field_value_byte, 0, field_length);
 					currentIndex += field_length;
 					String field_value = SimpleUtils.bytes2hex(field_value_byte);
-					field_value = SimpleUtils.hexStr2Str(field_value, fieldProperties.getProperty("encoding"));
+					if(field!=62){
+						field_value = SimpleUtils.hexStr2Str(field_value, fieldProperties.getProperty("encoding"));
+					}
 					fieldMap.put(fieldProperties.getProperty("name"), field_value);
+					System.out.println("["+fieldProperties.getProperty("name")+"]:"+field_value);
 				}
 			}
 		}

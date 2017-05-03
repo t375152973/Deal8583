@@ -1,6 +1,8 @@
 package com.jundu.parse8583;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -32,8 +34,13 @@ public class Bean8583Factory {
 
 	public void init() {
 		System.out.println("º”‘ÿ8583≈‰÷√ø™ º");
-
-		File f = new File(this.getClass().getResource("").getPath() + "ISO8583medata.xml");
+		String filePath = this.getClass().getResource("/").getPath()+"ISO8583medata.xml";
+		File f = null;
+		try {
+			f = new File(URLDecoder.decode(filePath,"UTF-8"));
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
 		if ((f.exists()) && (f.isFile())) {
 			SAXReader reader = new SAXReader();
 			try {

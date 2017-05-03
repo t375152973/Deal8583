@@ -29,14 +29,14 @@
 	<F26 type="string" length="2" field_index="26" encoding="GBK" zipType="leftBCD" />
 	<F28 type="string" length="9" field_index="28" encoding="GBK" />
 	<F32 type="string" length="11" variable_flag="2" field_index="32"
-		encoding="GBK" />
+		encoding="GBK" zipType="leftBCD" />
 	<F33 type="string" length="11" variable_flag="2" field_index="33"
 		encoding="GBK" />
 	<F35 type="string" length="37" variable_flag="2" field_index="35"
 		encoding="GBK" zipType="leftBCD" />
 	<F36 type="string" length="104" variable_flag="3" field_index="36"
 		encoding="GBK" zipType="leftBCD" />
-	<F37 type="string" length="12" field_index="37" encoding="GBK" />
+	<F37 type="string" length="12" field_index="37" encoding="GBK" zipType="ASCII"/>
 	<F38 type="string" length="6" field_index="38" encoding="GBK" />
 	<F39 type="string" length="2" field_index="39" encoding="GBK" zipType="ASCII" />
 	<F41 type="string" length="8" field_index="41" encoding="GBK" zipType="ASCII" />
@@ -65,7 +65,7 @@
 	<F61 type="string" length="200" variable_flag="3" field_index="61"
 		encoding="GBK" />
 	<F62 type="string" length="200" variable_flag="3" field_index="62"
-		encoding="GBK" />
+		encoding="GBK" zipType="ASCII" />
 	<F63 type="string" length="200" variable_flag="3" field_index="63"
 		encoding="GBK" zipType="ASCII" />
 	<F64 type="string" length="8" field_index="64" encoding="GBK" zipType="ASCII" />
